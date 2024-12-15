@@ -1,24 +1,29 @@
 function firstNonRepeatedChar(str) {
+    // If the string is empty, return null
     if (str.length === 0) {
         return null;
     }
 
-    // Create a frequency map
-    const charCount = new Map();
+    // Create an object to count how many times each character appears
+    const charCount = {};
 
-    // Count the frequency of each character
+    // Count each character in the string
     for (let char of str) {
-        charCount.set(char, (charCount.get(char) || 0) + 1);
+        if (charCount[char]) {
+            charCount[char]++;
+        } else {
+            charCount[char] = 1;
+        }
     }
 
-    // Find the first non-repeated character
+    // Find the first character with a count of 1
     for (let char of str) {
-        if (charCount.get(char) === 1) {
+        if (charCount[char] === 1) {
             return char;
         }
     }
 
-    // If no non-repeated character is found
+    // If all characters are repeated, return null
     return null;
 }
 
